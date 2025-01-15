@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}Author List{% endblock %}
+
+{% block content %}
+    <h1>Authors</h1>
+    <div class="containerr">
+        <div class="column">
+            <ul class="author-list">
+                {% for author in page_obj %}
+                    <li class="item">
+                        <a href="{% url 'author_detail' author.slug %}" class="item-link">{{ author.name }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="column author-details" id="author-details">
+            <h2>Select an author to view details</h2>
+        </div>
+    </div>
+
+    <div class="pagination">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">First</a>
+            <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+        {% endif %}
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">Next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+        {% endif %}
+    </div>
+{% endblock %}

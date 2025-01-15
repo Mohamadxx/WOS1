@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Author Details{% endblock %}
+
+{% block content %}
+    <div class="containerr">
+        <div class="column">
+            <h2>{{ author.name }}</h2>
+            <p>H-Index: {{ author.h_index }}</p>
+            <p>Slug: {{ author.slug }}</p>
+        </div>
+
+        <div class="column">
+            <h3>Publications</h3>
+            <ul class="item-list">
+                {% for publication in author.publications.all %}
+                    <li class="item">{{ publication.title }} (Volume: {{ publication.volume }})</li>
+                {% empty %}
+                    <p>No publications found for this author.</p>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}
